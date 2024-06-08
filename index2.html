@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discount with Coupon Code</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <section>
+        <main>
+            <div class="bg-white p-8 rounded-lg shadow-lg max-w-md mx-auto">
+                <h3 class="text-2xl font-semibold mb-4">Total Amount: $<span id="amount-display" class="text-green-600">1000</span></h3>
+                <h4 class="text-lg font-medium mb-2">Get 30% Off with Coupon Code</h4>
+                <p class="mb-4 text-gray-700">Enter your coupon code below to receive your discount</p>
+                <input id="coupon-field" type="text" placeholder="Enter coupon code" class="w-full p-3 border border-gray-300 rounded mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <button id="apply-btn" class="bg-blue-500 text-white w-full py-3 rounded font-medium hover:bg-blue-600 transition duration-300">Apply Discount</button>
+                <p id="error-message" class="hidden"></p>
+            </div>
+        </main>
+    </section>
+    <script>
+        document.getElementById('apply-btn').addEventListener('click', function() {
+            let couponField = document.getElementById('coupon-field');
+            let couponCode = couponField.value;
+            let displayAmount = document.getElementById('amount-display');
+            let displayTextStr = displayAmount.innerText;
+            let displayText = parseFloat(displayTextStr);
+            let errorMessage = document.getElementById('error-message');
+            let applyBtn = document.getElementById('apply-btn');
+
+            if (couponCode === 'DISC') {
+                let discountAmount = displayText * 0.7;
+                displayAmount.innerText = discountAmount;
+                errorMessage.classList.remove('hidden', 'text-red-500');
+                errorMessage.classList.add('text-green-500');
+                errorMessage.innerText = "coupon, Activated";
+                
+                applyBtn.disabled = true;
+                applyBtn.classList.add('bg-gray-500', 'cursor-not-allowed');
+                applyBtn.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+            } else {
+                errorMessage.innerText = "Invalid coupon, you have to pay the full price.";
+                errorMessage.classList.remove('hidden', 'text-green-500');
+                errorMessage.classList.add('text-red-500');
+            }
+        });
+    </script>
+</body>
+</html>

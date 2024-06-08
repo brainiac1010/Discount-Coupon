@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discount</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <section>
+        <main class="flex items-center justify-center">
+            <div class="bg-sky-400 text-center rounded-md mt-5 p-8 w-1/2 basis-1/4 grid">
+                <h2 class="text-base font-bold text-white">Amount $<span id="amount">1000</span></h2>
+                <h4 class="font-semibold text-white">30% discount</h4>
+                <button id="btn-pay" type="button" class="bg-gradient-to-r from-blue-800 to-blue-600 hover:from-pink-500 hover:to-yellow-500 mx-12 mt-3 rounded text-white">Pay</button>
+            </div>
+        </main>
+    </section>
+    <script>
+        document.getElementById('btn-pay').addEventListener('click', function() {
+            let amountPlace = document.getElementById('amount');
+            let amountStr = amountPlace.innerText;
+            let amount = parseFloat(amountStr);
+            let discountAmount = amount*0.7;
+            amountPlace.innerText = discountAmount.toFixed(2);
+        });
+    </script>
+</body>
+</html>
